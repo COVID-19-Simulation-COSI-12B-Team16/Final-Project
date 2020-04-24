@@ -27,7 +27,11 @@ public class Cell {
             }
         }
 
-        nextAlive = aliveCount <= higherBound && aliveCount >= lowerBound;
+        if(isAlive) {
+            nextAlive = aliveCount <= higherBound && aliveCount >= lowerBound;
+        } else {
+            nextAlive = aliveCount == higherBound;
+        }
 
     }
 
