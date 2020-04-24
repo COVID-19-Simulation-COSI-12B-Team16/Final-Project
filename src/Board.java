@@ -11,10 +11,13 @@ public class Board {
 
     private int tick = 0;
 
+    private Display display;
+
     Board(int _row, int _col){
         row = _row;
         col = _col;
         cells = new Cell[row][col];
+        display = new Display("New Life Game", _col * Display.CELL_DISPLAY_PIXEL_HEIGHT, _row * Display.CELL_DISPLAY_PIXEL_WIDTH);
     }
 
     /**
@@ -38,7 +41,8 @@ public class Board {
     void start(){
         while(!terminate()){
             draw();
-            print();
+            // print();
+            draw();
             moveToNextGeneration();
             tick ++;
         }
@@ -64,7 +68,7 @@ public class Board {
      * Render the board on canvas
      */
     private void draw(){
-
+        display.render(cells);
     }
 
     /**
