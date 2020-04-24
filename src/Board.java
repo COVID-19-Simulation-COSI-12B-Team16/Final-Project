@@ -6,7 +6,7 @@ public class Board {
     private Cell[][] cells;
 
     private Random rand = new Random();
-    private final double initialAliveProbability = 0.7;
+    private final double initialAliveProbability = 0.5;
     private boolean stop;
 
     private int tick = 0;
@@ -33,9 +33,9 @@ public class Board {
      */
     void start(){
         while(!terminate()){
-            moveToNextGeneration();
             draw();
             print();
+            moveToNextGeneration();
             tick ++;
         }
     }
