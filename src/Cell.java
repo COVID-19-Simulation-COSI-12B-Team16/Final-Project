@@ -8,8 +8,10 @@ public class Cell {
     private int lowerBound = 3;
     private int higherBound = 3;
 
-    Cell(boolean _isAlive){
+    Cell(boolean _isAlive, int _x, int _y){
         isAlive = _isAlive;
+        x = _x;
+        y = _y;
     }
 
     /**
@@ -20,6 +22,7 @@ public class Cell {
         for(int i = x - 1; i <= x + 1; i ++) {
             for (int j = y - 1; j <= y + 1; j++) {
                 if (i < 0 || i >= cells.length || j < 0 || j >= cells[0].length) continue;
+                if (i == x && j == y) continue;
                 if (cells[i][j].isAlive()) aliveCount++;
             }
         }

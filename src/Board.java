@@ -6,7 +6,7 @@ public class Board {
     private Cell[][] cells;
 
     private Random rand = new Random();
-    private final double initialAliveProbability = 0.3;
+    private final double initialAliveProbability = 0.7;
     private boolean stop;
 
     private int tick = 0;
@@ -23,7 +23,7 @@ public class Board {
     private void init(){
         for(int i = 0; i < cells.length; i ++){
             for(int j = 0; j < cells[0].length; j ++){
-                cells[i][j] = new Cell(rand.nextDouble() < initialAliveProbability);
+                cells[i][j] = new Cell(rand.nextDouble() < initialAliveProbability, i, j);
             }
         }
     }
@@ -32,9 +32,10 @@ public class Board {
      * Start clock
      */
     void start(){
-        while(!stop){
+        while(!terminate()){
             moveToNextGeneration();
             draw();
+            print();
             tick ++;
         }
     }
@@ -44,6 +45,10 @@ public class Board {
      */
     void stop(){
         stop = true;
+    }
+
+    boolean terminate(){
+        return tick > 50;
     }
 
     void resume(){
@@ -73,5 +78,26 @@ public class Board {
                 cells[i][j].nextGeneration();
             }
         }
+    }
+
+    private void print(){
+        System.out.printf("----Tick number %d----\n", tick);
+        for(int i = 0; i < cells.length; i ++){
+            for(int j = 0; j < cells[0].length; j ++){
+                if(cells[i][j].isAlive()){
+                    System.out.print("0");
+                } else {
+                    System.out.print("X");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println("-------");
+    }
+
+    public static void main(String[] args) {
+        Board b = new Board(6, 6);
+        b.init();
+        b.start();
     }
 }
