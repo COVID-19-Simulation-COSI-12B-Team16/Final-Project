@@ -1,12 +1,12 @@
 public class Cell {
-    private boolean isAlive;
-    private boolean nextAlive;
+    protected boolean isAlive;
+    protected boolean nextAlive;
 
-    private int x;
-    private int y;
+    protected int x;
+    protected int y;
 
-    private int lowerBound = 3;
-    private int higherBound = 3;
+    protected int lowerBound = 3;
+    protected int higherBound = 3;
 
     Cell(boolean _isAlive, int _x, int _y){
         isAlive = _isAlive;
