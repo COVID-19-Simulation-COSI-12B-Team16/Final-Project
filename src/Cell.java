@@ -8,6 +8,10 @@ public class Cell {
     private int lowerBound = 3;
     private int higherBound = 3;
 
+    Cell(boolean _isAlive){
+        isAlive = _isAlive;
+    }
+
     /**
      * Update nextAlive attribute according to surrounding cells' conditions
      */
