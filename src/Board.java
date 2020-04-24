@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Board {
+public class Board implements Runnable{
     private int row;
     private int col;
     private Cell[][] cells;
@@ -13,11 +13,29 @@ public class Board {
 
     private Display display;
 
+    private Thread thread;
+
     Board(int _row, int _col){
         row = _row;
         col = _col;
         cells = new Cell[row][col];
         display = new Display("New Life Game", _col * Display.CELL_DISPLAY_PIXEL_HEIGHT, _row * Display.CELL_DISPLAY_PIXEL_WIDTH);
+    }
+
+    @Override
+    public void run() {
+        init();
+        while (!stop) {
+            draw();
+            moveToNextGeneration();
+            tick ++;
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (terminate()) stop();
+        }
     }
 
     /**
@@ -38,21 +56,23 @@ public class Board {
     /**
      * Start clock
      */
-    void start(){
-        while(!terminate()){
-            draw();
-            // print();
-            draw();
-            moveToNextGeneration();
-            tick ++;
-        }
+    synchronized void start(){
+        stop = false;
+        thread = new Thread(this);
+        thread.start();
     }
 
     /**
      * Stop clock
      */
-    void stop(){
+    synchronized void stop(){
+        if (stop) return; // Since we are not using a lock on 'stop' here, always do this to prevent messy stuff
         stop = true;
+        try {
+            thread.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     boolean terminate(){
@@ -104,8 +124,8 @@ public class Board {
     }
 
     public static void main(String[] args) {
-        Board b = new Board(6, 6);
-        b.init();
+        Board b = new Board(100, 100);
+        // b.init();
         b.start();
     }
 }
