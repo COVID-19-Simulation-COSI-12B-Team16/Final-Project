@@ -23,7 +23,11 @@ public class Board {
     private void init(){
         for(int i = 0; i < cells.length; i ++){
             for(int j = 0; j < cells[0].length; j ++){
-                cells[i][j] = new Cell(rand.nextDouble() < initialAliveProbability, i, j);
+                int lowerBound = (int)rand.nextDouble() * (6 - 2 + 1) + 2;
+                cells[i][j] = new CustomizedCell(
+                        rand.nextDouble() < initialAliveProbability,
+                        i, j, lowerBound, lowerBound + 1
+                );
             }
         }
     }

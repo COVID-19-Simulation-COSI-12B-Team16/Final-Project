@@ -5,7 +5,7 @@ public class Cell {
     protected int x;
     protected int y;
 
-    protected int lowerBound = 3;
+    protected int lowerBound = 2;
     protected int higherBound = 3;
 
     Cell(boolean _isAlive, int _x, int _y){
