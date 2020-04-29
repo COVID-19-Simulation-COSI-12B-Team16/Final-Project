@@ -8,7 +8,7 @@ public class Board{
     private Display display;
 
     private Random rand = new Random();
-    private final double initialAliveProbability = 0.05;
+    private final double initialAliveProbability = 0.1;
     private int tick = 0;
     private Cell[][] cells;
 
