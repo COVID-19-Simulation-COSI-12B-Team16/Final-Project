@@ -2,3 +2,4 @@
 Final-Project.iml
 *.class
 out/
+**/.DS_Store
