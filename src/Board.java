@@ -60,6 +60,10 @@ public class Board{
         display.render(cells);
     }
 
+    public void close() {
+        display.close();
+    }
+
     private Board(int _row, int _col){
         row = _row;
         col = _col;

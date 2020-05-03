@@ -48,6 +48,13 @@ public class Display{
     }
 
     /**
+     * Close current window
+     */
+    public void close() {
+        frame.dispose();;
+    }
+
+    /**
      * Create frame and canvas, using width and height
      */
     private void createDisplay() {

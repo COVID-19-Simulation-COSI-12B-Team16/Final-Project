@@ -42,6 +42,7 @@ public class Game implements Runnable{
         if (!running) return; // Since we are not using a lock on 'stop' here, always do this to prevent messy stuff
         running = false;
         try {
+            board.close();
             thread.join();
         } catch (Exception e) {
             e.printStackTrace();
